@@ -1,11 +1,11 @@
-<template>
+<template v-if="dataLoaded">
   <div class="container">
     <Title title="Vue Pastebin"/>
     <div id="nav">
       <router-link to="/">Create Another Paste</router-link>
     </div>
     <ul>
-      <li v-for="(paste, index) of this.$store.getters.pastes" :key="paste.id">
+      <li v-for="(paste, index) of pastes" :key="paste.id">
         <div class="card">
           <Pastebox :code="paste[index].paste" :readonly="true" :language="paste[index].language" />
         </div>
@@ -35,7 +35,13 @@ export default {
   mounted() {
     let page_id = this.$route.params.id
     this.$store.dispatch('getPastes', page_id)
-    console.log(this.$store.getters.pastes)
+    this.pastes = this.$store.getters.pastes;
+    if (localStorage.getItem('reloaded')) {
+        localStorage.removeItem('reloaded');
+    } else {
+        localStorage.setItem('reloaded', '1');
+        location.reload();
+    }
   }
 }
 </script>

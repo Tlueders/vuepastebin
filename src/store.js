@@ -20,7 +20,7 @@ export default new Vuex.Store({
       state.paste = paste
     },
     addPastes(state, pastes) {
-      state.pastes.push(pastes)
+      state.pastes.unshift(pastes)
     }
   },
   getters: {
@@ -32,14 +32,12 @@ export default new Vuex.Store({
       addPaste: function ({commit}, payload) {
         axios.post('https://vue-pastebin-api.herokuapp.com/api/paste', payload)
           .then((response) => {
-            console.log(response.data);
             router.push(`/pastes/${response.data.data.page_id}`)
           })
       },
       getPastes: function(context, page_id) {
         axios.get(`https://vue-pastebin-api.herokuapp.com/api/pastes/${page_id}`)
           .then((response) => {
-            console.log(response.data)
             context.commit('addPastes', response.data)
           })
       }

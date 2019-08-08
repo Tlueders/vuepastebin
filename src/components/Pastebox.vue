@@ -8,7 +8,7 @@
         <option value="php">PHP</option>
         <option value="go">GO</option>
       </select>
-      <prism-editor v-model="code" @change="onPasteboxChange" :language="language" :line-numbers="lineNumbers" :readonly="readonly">{{code}}</prism-editor>
+      <prism-editor v-model="code" @change="onPasteboxChange" :language="language" :line-numbers="true" :readonly="readonly">{{code}}</prism-editor>
     </div>
 </template>
 
@@ -22,8 +22,7 @@ export default {
   name: 'Title',
   data(){
     return {
-      lineNumbers: true,
-      language: "js"
+      language: "js",
     }
   },
   components: {
@@ -31,7 +30,7 @@ export default {
   },
   
   props: {
-    title: String,
+    lineNumbers: Boolean,
     code: String,
     readonly: Boolean
   },
