@@ -43,6 +43,7 @@ export default {
 <style>
   ul {
     list-style: none;
+    padding: 0;
   }
   .credit {
      padding: 1rem 0;
