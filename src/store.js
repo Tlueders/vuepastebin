@@ -30,14 +30,14 @@ export default new Vuex.Store({
   },
   actions: {
       addPaste: function ({commit}, payload) {
-        axios.post('http://localhost:5000/api/paste', payload)
+        axios.post('https://vue-pastebin-api.com/api/paste', payload)
           .then((response) => {
             console.log(response.data);
             router.push(`/pastes/${response.data.data.page_id}`)
           })
       },
       getPastes: function(context, page_id) {
-        axios.get(`http://localhost:5000/api/pastes/${page_id}`)
+        axios.get(`https://vue-pastebin-api.com/api/pastes/${page_id}`)
           .then((response) => {
             console.log(response.data)
             context.commit('addPastes', response.data)
